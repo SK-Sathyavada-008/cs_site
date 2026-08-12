@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grievances – Cornerstone Cooperative Housing Society</title>
+<meta name="description" content="Submit and track grievances for Cornerstone Cooperative Housing Society residents. We are committed to resolving your concerns promptly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── Colour tokens – Night (default) ── */
+  :root {
+    --bg:          #14120f;
+    --surface:     rgba(20,18,15,0.92);
+    --text:        #f6f1e9;
+    --text-muted:  rgba(246,241,233,0.55);
+    --gold:        #cba135;
+    --gold-glow:   rgba(203,161,53,0.25);
+    --border:      rgba(203,161,53,0.25);
+    --input-bg:    rgba(255,255,255,0.05);
+    --input-border:rgba(203,161,53,0.2);
+    --form-bg:     rgba(255,255,255,0.03);
+    --form-border: rgba(203,161,53,0.15);
+    --select-opt:  #1e1b16;
+    --modal-bg:    #1a1713;
+    --error-color: #e57373;
+  }
+
+  /* ── Day mode overrides ── */
+  body.day {
+    --bg:          #f4f0e8;
+    --surface:     rgba(244,240,232,0.95);
+    --text:        #1a1714;
+    --text-muted:  rgba(26,23,20,0.55);
+    --gold:        #9a7520;
+    --gold-glow:   rgba(154,117,32,0.25);
+    --border:      rgba(154,117,32,0.3);
+    --input-bg:    rgba(255,255,255,0.7);
+    --input-border:rgba(154,117,32,0.25);
+    --form-bg:     rgba(255,255,255,0.5);
+    --form-border: rgba(154,117,32,0.2);
+    --select-opt:  #f4f0e8;
+    --modal-bg:    #fdfbf7;
+    --error-color: #c62828;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: background 0.35s, color 0.35s;
+  }
+
+  /* ── Navbar ── */
+  nav {
+    position: sticky;
+    top: 0; z-index: 100;
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    height: 58px;
+    transition: background 0.35s, border-color 0.35s;
+  }
+
+  nav .nav-links {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex: 1;
+    justify-content: center;
+  }
+
+  nav a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 0 1.6rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: color 0.25s;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover, nav a.active { color: var(--text); }
+  nav a:hover::after, nav a.active::after { width: 60%; }
+
+  /* ── Day/Night toggle ── */
+  #theme-toggle {
+    position: absolute;
+    right: 1.5rem;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    white-space: nowrap;
+  }
+
+  #theme-toggle:hover {
+    border-color: var(--gold);
+    color: var(--text);
+    background: rgba(203,161,53,0.08);
+  }
+
+  #theme-toggle .toggle-icon { font-size: 0.95rem; }
+
+  /* ── Page Header ── */
+  .page-header {
+    text-align: center;
+    padding: 4rem 1.5rem 2.5rem;
+    border-bottom: 1px solid rgba(203,161,53,0.15);
+    transition: border-color 0.35s;
+  }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    color: var(--text);
+    letter-spacing: 0.04em;
+    transition: color 0.35s;
+  }
+
+  .page-header .gold-line {
+    width: 80px; height: 2px;
+    background: var(--gold);
+    margin: 1.2rem auto;
+    transition: background 0.35s;
+  }
+
+  .page-header p {
+    font-weight: 300;
+    font-size: clamp(0.85rem, 1.4vw, 1rem);
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    transition: color 0.35s;
+  }
+
+  /* ── Form Section ── */
+  .form-section {
+    max-width: 720px;
+    margin: 3.5rem auto 5rem;
+    padding: 0 1.5rem;
+  }
+
+  .form-section .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    text-align: center;
+    transition: color 0.35s;
+  }
+
+  .grievance-form {
+    background: var(--form-bg);
+    border: 1px solid var(--form-border);
+    border-radius: 14px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    transition: background 0.35s, border-color 0.35s;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    transition: color 0.35s;
+  }
+
+  .form-group .hint {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: -0.15rem;
+  }
+
+  .form-group input[type="text"],
+  .form-group select,
+  .form-group textarea {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.25s, background 0.25s, color 0.25s, box-shadow 0.25s;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+
+  .form-group select option {
+    background: var(--select-opt);
+    color: var(--text);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+    background: rgba(203,161,53,0.06);
+    box-shadow: 0 0 0 3px var(--gold-glow);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+
+  /* File upload area styling */
+  .file-upload-wrapper {
+    position: relative;
+    border: 2px dashed var(--input-border);
+    border-radius: 8px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    background: var(--input-bg);
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s;
+  }
+
+  .file-upload-wrapper:hover {
+    border-color: var(--gold);
+    background: rgba(203,161,53,0.06);
+  }
+
+  .file-upload-wrapper input[type="file"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .file-upload-icon {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .file-upload-text {
+    font-size: 0.8rem;
+    color: var(--text);
+  }
+
+  .file-upload-subtext {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+
+  .file-list {
+    margin-top: 0.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .file-item {
+    font-size: 0.75rem;
+    background: rgba(203,161,53,0.15);
+    color: var(--gold);
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    border: 1px solid var(--input-border);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .submit-btn {
+    align-self: flex-end;
+    background: var(--gold);
+    color: #14120f;
+    border: none;
+    border-radius: 8px;
+    padding: 0.9rem 2.6rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(203,161,53,0.25);
+    transition: opacity 0.25s, transform 0.2s, background 0.35s, box-shadow 0.25s;
+    margin-top: 0.5rem;
+  }
+
+  .submit-btn:hover { opacity: 0.92; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(203,161,53,0.35); }
+
+  /* ── Custom Alert Modal ("In the same style") ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-box {
+    background: var(--modal-bg);
+    border: 1px solid var(--gold);
+    border-radius: 14px;
+    padding: 2.2rem 2rem;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 25px var(--gold-glow);
+    text-align: center;
+    transform: scale(0.9) translateY(10px);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.active .modal-box {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(203,161,53,0.15);
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1.2rem;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+
+  .modal-desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 1.6rem;
+    white-space: pre-line;
+  }
+
+  .modal-btn {
+    background: var(--gold);
+    color: #14120f;
+    border: none;
+    border-radius: 6px;
+    padding: 0.65rem 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .modal-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* ── Success Toast ── */
+  .toast {
+    display: none;
+    align-items: center;
+    gap: 0.7rem;
+    background: rgba(203,161,53,0.12);
+    border: 1px solid rgba(203,161,53,0.35);
+    border-radius: 8px;
+    padding: 1rem 1.4rem;
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-top: 1rem;
+    animation: fadeUp 0.4s ease;
+    transition: color 0.35s;
+  }
+
+  .toast.visible { display: flex; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(8px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 2.5rem 1.5rem 3rem;
+    border-top: 1px solid rgba(203,161,53,0.1);
+    margin-top: 4rem;
+    transition: border-color 0.35s;
+  }
+
+  footer .tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    transition: color 0.35s;
+  }
+
+  footer .copyright {
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    transition: color 0.35s;
+  }
+
+  @media (max-width: 580px) {
+    .form-row { grid-template-columns: 1fr; }
+    .submit-btn { align-self: stretch; text-align: center; }
+    .grievance-form { padding: 1.8rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-links">
+      <a href="../index.html" id="nav-home">Home</a>
+      <a href="committe.html" id="nav-committee">Committee</a>
+      <a href="grievances.html" class="active" id="nav-grievances">Grievances</a>
+    </div>
+    <button id="theme-toggle" aria-label="Toggle day/night mode">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Night</span>
+    </button>
+  </nav>
+
+  <div class="page-header">
+    <h1>Grievances</h1>
+    <div class="gold-line"></div>
+    <p>We take every concern seriously. Submit your grievance below and our committee will respond promptly.</p>
+  </div>
+
+  <section class="form-section">
+    <div class="section-label">Submit a Grievance</div>
+    <form class="grievance-form" id="grievance-form" novalidate>
+
+      <!-- 1. Your name -->
+      <div class="form-group">
+        <label for="your-name">Your Name</label>
+        <input type="text" id="your-name" placeholder="Enter your full name" required>
+      </div>
+
+      <!-- 2. Your Tower & 3. Flat number -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="res-tower">Your Tower (T1-T10)</label>
+          <select id="res-tower" required>
+            <option value="" disabled selected>Select Tower</option>
+            <option value="T1">Tower 1 (T1)</option>
+            <option value="T2">Tower 2 (T2)</option>
+            <option value="T3">Tower 3 (T3)</option>
+            <option value="T4">Tower 4 (T4)</option>
+            <option value="T5">Tower 5 (T5)</option>
+            <option value="T6">Tower 6 (T6)</option>
+            <option value="T7">Tower 7 (T7)</option>
+            <option value="T8">Tower 8 (T8)</option>
+            <option value="T9">Tower 9 (T9)</option>
+            <option value="T10">Tower 10 (T10)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="flat-number">Flat Number</label>
+          <input type="text" id="flat-number" list="flat-list" placeholder="Type or select flat (e.g. 101, G01)" required disabled autocomplete="off">
+          <datalist id="flat-list"></datalist>
+          <span class="hint" id="flat-hint">Select a tower to auto-filter available flats</span>
+        </div>
+      </div>
+
+      <!-- 4. Grievance Details (explain in detail) -->
+      <div class="form-group">
+        <label for="grievance-details">Grievance Details (explain in detail)</label>
+        <textarea id="grievance-details" placeholder="Please describe your concern in detail..." required></textarea>
+      </div>
+
+      <!-- 5. Is it single person/flat issue, tower issue or community Issue -->
+      <div class="form-group">
+        <label for="issue-scope">Is it single person/flat issue, tower issue or community Issue</label>
+        <select id="issue-scope" required>
+          <option value="" disabled selected>Select Issue Type</option>
+          <option value="Single person / Flat issue">Single person / Flat issue</option>
+          <option value="Tower issue">Tower issue</option>
+          <option value="Community Issue">Community Issue</option>
+        </select>
+      </div>
+
+      <!-- 6. What is your expectation -->
+      <div class="form-group">
+        <label for="expectation">What is your expectation</label>
+        <textarea id="expectation" placeholder="Explain what resolution or action you expect..." required></textarea>
+      </div>
+
+      <!-- 7. Can you drive this issue along with MC and team ? -->
+      <div class="form-group">
+        <label for="can-drive">Can you drive this issue along with MC and team ?</label>
+        <select id="can-drive" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="Needs Discussion">Needs Discussion</option>
+        </select>
+      </div>
+
+      <!-- 8. Attachments -->
+      <div class="form-group">
+        <label for="attachments">Attachments</label>
+        <div class="file-upload-wrapper">
+          <input type="file" id="attachments" multiple accept="image/*,.pdf,.doc,.docx">
+          <div class="file-upload-icon">📎</div>
+          <div class="file-upload-text">Click or drag files here to upload</div>
+          <div class="file-upload-subtext">Supports images, PDF, and document files</div>
+        </div>
+        <div class="file-list" id="file-list"></div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-grievance">Submit Grievance</button>
+
+      <div class="toast" id="success-toast" role="alert">
+        ✓ &nbsp;Your grievance has been submitted. The committee will reach out to you shortly.
+      </div>
+
+    </form>
+  </section>
+
+  <!-- ── Custom Styled Alert Modal ── -->
+  <div class="modal-overlay" id="custom-alert-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-icon">⚠️</div>
+      <div class="modal-title" id="modal-title-text">Invalid Flat Number</div>
+      <div class="modal-desc" id="modal-desc-text">Please select or enter a valid flat number for the chosen tower.</div>
+      <button type="button" class="modal-btn" id="modal-close-btn">Understood</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="tagline">Building community, one home at a time.</div>
+    <div class="copyright">&copy; 2026 Cornerstone Cooperative Housing Society. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // ── Theme toggle ──
+    (function() {
+      const btn   = document.getElementById('theme-toggle');
+      const icon  = btn.querySelector('.toggle-icon');
+      const label = btn.querySelector('.toggle-label');
+
+      function applyTheme(mode) {
+        if (mode === 'day') {
+          document.body.classList.add('day');
+          icon.textContent  = '☀️';
+          label.textContent = 'Day';
+        } else {
+          document.body.classList.remove('day');
+          icon.textContent  = '🌙';
+          label.textContent = 'Night';
+        }
+      }
+
+      applyTheme(localStorage.getItem('cs-theme') || 'night');
+
+      btn.addEventListener('click', function() {
+        const isDay = document.body.classList.contains('day');
+        const next  = isDay ? 'night' : 'day';
+        localStorage.setItem('cs-theme', next);
+        applyTheme(next);
+      });
+    })();
+
+    // ── Tower & Dynamic Flat Validation Logic ──
+    const towerSelect = document.getElementById('res-tower');
+    const flatInput   = document.getElementById('flat-number');
+    const flatDatalist= document.getElementById('flat-list');
+    const flatHint    = document.getElementById('flat-hint');
+    const fileInput   = document.getElementById('attachments');
+    const fileList    = document.getElementById('file-list');
+
+    // Floors: Ground (G), 1 to 12, 14, 15 (No 13th floor)
+    const validFloors = ['G', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15];
+
+    function getTowerMaxFlats(tower) {
+      if (tower === 'T1') return 10;
+      if (tower === 'T8' || tower === 'T9') return 4;
+      return 8; // T2..T7, T10
+    }
+
+    function generateFlatsForTower(tower) {
+      const maxFlats = getTowerMaxFlats(tower);
+      const flats = [];
+      validFloors.forEach(f => {
+        for (let i = 1; i <= maxFlats; i++) {
+          const suffix = i < 10 ? '0' + i : '' + i;
+          if (f === 'G') {
+            flats.push('G' + suffix);
+          } else {
+            flats.push(f + suffix);
+          }
+        }
+      });
+      return flats;
+    }
+
+    function updateFlatDatalist(tower) {
+      flatDatalist.innerHTML = '';
+      if (!tower) {
+        flatInput.disabled = true;
+        flatInput.value = '';
+        flatHint.textContent = 'Select a tower to auto-filter available flats';
+        return;
+      }
+
+      const flats = generateFlatsForTower(tower);
+      const maxFlats = getTowerMaxFlats(tower);
+
+      flats.forEach(flat => {
+        const opt = document.createElement('option');
+        opt.value = flat;
+        flatDatalist.appendChild(opt);
+      });
+
+      flatInput.disabled = false;
+      flatHint.textContent = `Type or select a flat for ${tower} (Max ${maxFlats} flats/floor, Floors G, 1–12, 14, 15)`;
+    }
+
+    towerSelect.addEventListener('change', function() {
+      const selectedTower = this.value;
+      updateFlatDatalist(selectedTower);
+      if (flatInput.value.trim()) {
+        validateAndAlertFlat(true);
+      }
+    });
+
+    function validateFlatInput(tower, rawVal) {
+      if (!rawVal || !rawVal.trim()) {
+        return { valid: false, empty: true };
+      }
+
+      let val = rawVal.trim().toUpperCase().replace(/[\s-]/g, '');
+
+      // Normalize single digit ground floor (e.g. G1 -> G01)
+      if (/^G[1-9]$/.test(val)) {
+        val = 'G0' + val.substring(1);
+      }
+
+      const validFlats = generateFlatsForTower(tower);
+      const maxFlats = getTowerMaxFlats(tower);
+
+      if (validFlats.includes(val)) {
+        return { valid: true, formatted: val };
+      }
+
+      // Detailed error breakdown for custom alert modal
+      if (val.startsWith('13') && (val.length === 3 || val.length === 4)) {
+        return {
+          valid: false,
+          message: `Floor 13 does not exist in Cornerstone Housing Society.\n\nValid floors are Ground (G), 1 to 12, 14, and 15.`
+        };
+      }
+
+      let flatNum = null;
+      if (val.startsWith('G')) {
+        flatNum = parseInt(val.substring(1), 10);
+      } else if (val.length === 3) {
+        flatNum = parseInt(val.substring(1), 10);
+      } else if (val.length === 4) {
+        flatNum = parseInt(val.substring(2), 10);
+      }
+
+      if (flatNum && flatNum > maxFlats) {
+        return {
+          valid: false,
+          message: `Flat "${rawVal}" exceeds floor capacity for ${tower}.\n\n${tower} has a maximum of ${maxFlats} flats per floor (flats 01 to ${maxFlats < 10 ? '0' + maxFlats : maxFlats}).`
+        };
+      }
+
+      return {
+        valid: false,
+        message: `Flat "${rawVal}" is invalid for ${tower}.\n\nRules for ${tower}:\n• Max ${maxFlats} flats per floor (flats 01 to ${maxFlats < 10 ? '0' + maxFlats : maxFlats})\n• Valid floors: Ground (G), 1–12, 14, 15 (Floor 13 excluded)`
+      };
+    }
+
+    function validateAndAlertFlat(clearIfInvalid = false) {
+      const tower = towerSelect.value;
+      const rawVal = flatInput.value.trim();
+
+      if (!tower) return false;
+      if (!rawVal) return false;
+
+      const res = validateFlatInput(tower, rawVal);
+      if (res.valid) {
+        flatInput.value = res.formatted;
+        return true;
+      } else {
+        showAlert('Invalid Flat Number', res.message);
+        if (clearIfInvalid) {
+          flatInput.value = '';
+        }
+        return false;
+      }
+    }
+
+    flatInput.addEventListener('change', function() {
+      if (this.value.trim()) {
+        validateAndAlertFlat(false);
+      }
+    });
+
+    // ── Custom Styled Alert Modal Controls ──
+    const modalOverlay = document.getElementById('custom-alert-modal');
+    const modalTitle   = document.getElementById('modal-title-text');
+    const modalDesc    = document.getElementById('modal-desc-text');
+    const modalClose   = document.getElementById('modal-close-btn');
+
+    function showAlert(title, message) {
+      modalTitle.textContent = title;
+      modalDesc.innerText = message;
+      modalOverlay.classList.add('active');
+    }
+
+    modalClose.addEventListener('click', function() {
+      modalOverlay.classList.remove('active');
+    });
+
+    modalOverlay.addEventListener('click', function(e) {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('active');
+      }
+    });
+
+    // ── File upload listing ──
+    fileInput.addEventListener('change', function() {
+      fileList.innerHTML = '';
+      if (this.files.length > 0) {
+        Array.from(this.files).forEach(file => {
+          const item = document.createElement('div');
+          item.className = 'file-item';
+          item.innerHTML = `<span>📎 ${file.name}</span>`;
+          fileList.appendChild(item);
+        });
+      }
+    });
+
+    // ── Form Validation & Submission ──
+    document.getElementById('grievance-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('your-name').value.trim();
+      const tower = towerSelect.value;
+      const flat = flatInput.value.trim();
+      const details = document.getElementById('grievance-details').value.trim();
+      const scope = document.getElementById('issue-scope').value;
+      const expectation = document.getElementById('expectation').value.trim();
+      const canDrive = document.getElementById('can-drive').value;
+
+      if (!name) {
+        showAlert('Required Field Missing', 'Please enter your name.');
+        document.getElementById('your-name').focus();
+        return;
+      }
+
+      if (!tower) {
+        showAlert('Required Selection', 'Please select your Tower (T1-T10).');
+        towerSelect.focus();
+        return;
+      }
+
+      if (!flat) {
+        const maxFlats = getTowerMaxFlats(tower);
+        showAlert('Invalid Flat Selection', `Please enter or select a flat number for ${tower}.\n\nRules for ${tower}:\n• Max ${maxFlats} flats per floor (01 to ${maxFlats < 10 ? '0' + maxFlats : maxFlats})\n• Valid floors: Ground (G), 1–12, 14, 15 (Floor 13 excluded)`);
+        flatInput.focus();
+        return;
+      }
+
+      const flatValidation = validateFlatInput(tower, flat);
+      if (!flatValidation.valid) {
+        showAlert('Invalid Flat Number', flatValidation.message);
+        flatInput.focus();
+        return;
+      }
+
+      if (!details) {
+        showAlert('Required Field Missing', 'Please explain your grievance in detail.');
+        document.getElementById('grievance-details').focus();
+        return;
+      }
+
+      if (!scope) {
+        showAlert('Required Selection', 'Please select whether this is a single person/flat issue, tower issue or community issue.');
+        document.getElementById('issue-scope').focus();
+        return;
+      }
+
+      if (!expectation) {
+        showAlert('Required Field Missing', 'Please specify what your expectation is.');
+        document.getElementById('expectation').focus();
+        return;
+      }
+
+      if (!canDrive) {
+        showAlert('Required Selection', 'Please select whether you can drive this issue along with MC and team.');
+        document.getElementById('can-drive').focus();
+        return;
+      }
+
+      // Success toast trigger
+      const toast = document.getElementById('success-toast');
+      toast.classList.add('visible');
+      this.reset();
+      flatInput.disabled = true;
+      flatDatalist.innerHTML = '';
+      flatHint.textContent = 'Select a tower to auto-filter available flats';
+      fileList.innerHTML = '';
+      
+      setTimeout(() => toast.classList.remove('visible'), 6000);
+    });
+  </script>
+
+</body>
+</html>

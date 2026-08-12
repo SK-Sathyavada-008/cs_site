@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Committee – Cornerstone Cooperative Housing Society</title>
+<meta name="description" content="Meet the Committee of Cornerstone Cooperative Housing Society — the dedicated members who manage and guide our community.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── Colour tokens – Night (default) ── */
+  :root {
+    --bg:        #14120f;
+    --surface:   rgba(20,18,15,0.92);
+    --text:      #f6f1e9;
+    --text-muted:rgba(246,241,233,0.55);
+    --gold:      #cba135;
+    --border:    rgba(203,161,53,0.25);
+    --card-bg:   rgba(255,255,255,0.04);
+    --card-border:rgba(203,161,53,0.12);
+  }
+
+  /* ── Day mode overrides ── */
+  body.day {
+    --bg:        #f4f0e8;
+    --surface:   rgba(244,240,232,0.95);
+    --text:      #1a1714;
+    --text-muted:rgba(26,23,20,0.55);
+    --gold:      #9a7520;
+    --border:    rgba(154,117,32,0.3);
+    --card-bg:   rgba(255,255,255,0.65);
+    --card-border:rgba(154,117,32,0.2);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: background 0.35s, color 0.35s;
+  }
+
+  /* ── Navbar ── */
+  nav {
+    position: sticky;
+    top: 0; z-index: 100;
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    height: 58px;
+    transition: background 0.35s, border-color 0.35s;
+  }
+
+  nav .nav-links {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex: 1;
+    justify-content: center;
+  }
+
+  nav a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 0 1.6rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: color 0.25s;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover, nav a.active { color: var(--text); }
+  nav a:hover::after, nav a.active::after { width: 60%; }
+
+  /* ── Day/Night toggle ── */
+  #theme-toggle {
+    position: absolute;
+    right: 1.5rem;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    white-space: nowrap;
+  }
+
+  #theme-toggle:hover {
+    border-color: var(--gold);
+    color: var(--text);
+    background: rgba(203,161,53,0.08);
+  }
+
+  #theme-toggle .toggle-icon { font-size: 0.95rem; }
+
+  /* ── Page Header ── */
+  .page-header {
+    text-align: center;
+    padding: 4rem 1.5rem 2.5rem;
+    border-bottom: 1px solid rgba(203,161,53,0.15);
+    transition: border-color 0.35s;
+  }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    color: var(--text);
+    letter-spacing: 0.04em;
+    transition: color 0.35s;
+  }
+
+  .page-header .gold-line {
+    width: 80px; height: 2px;
+    background: var(--gold);
+    margin: 1.2rem auto;
+    transition: background 0.35s;
+  }
+
+  .page-header p {
+    font-weight: 300;
+    font-size: clamp(0.85rem, 1.4vw, 1rem);
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    transition: color 0.35s;
+  }
+
+  /* ── Committee Grid ── */
+  .committee-section {
+    max-width: 1100px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    text-align: center;
+    transition: color 0.35s;
+  }
+
+  .committee-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+    gap: 1.8rem;
+  }
+
+  .member-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .member-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(203,161,53,0.4);
+    background: rgba(203,161,53,0.06);
+  }
+
+  .member-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(203,161,53,0.3), rgba(203,161,53,0.08));
+    border: 2px solid rgba(203,161,53,0.35);
+    margin: 0 auto 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    transition: color 0.35s;
+  }
+
+  .member-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    transition: color 0.35s;
+  }
+
+  .member-role {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    transition: color 0.35s;
+  }
+
+  .member-flat {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    transition: color 0.35s;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 2.5rem 1.5rem 3rem;
+    border-top: 1px solid rgba(203,161,53,0.1);
+    margin-top: 4rem;
+    transition: border-color 0.35s;
+  }
+
+  footer .tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    transition: color 0.35s;
+  }
+
+  footer .copyright {
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    transition: color 0.35s;
+  }
+
+  @media (max-width: 600px) {
+    .committee-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-links">
+      <a href="../index.html" id="nav-home">Home</a>
+      <a href="committe.html" class="active" id="nav-committee">Committee</a>
+      <a href="grievances.html" id="nav-grievances">Grievances</a>
+    </div>
+    <button id="theme-toggle" aria-label="Toggle day/night mode">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Night</span>
+    </button>
+  </nav>
+
+  <div class="page-header">
+    <h1>The Committee</h1>
+    <div class="gold-line"></div>
+    <p>Meet the dedicated members who oversee and guide the Cornerstone Cooperative Housing Society.</p>
+  </div>
+
+  <section class="committee-section">
+    <div class="section-label">Executive Members</div>
+    <div class="committee-grid">
+
+      <div class="member-card">
+        <div class="member-avatar">P</div>
+        <div class="member-name">President</div>
+        <div class="member-role">Chairperson</div>
+        <div class="member-flat">To be updated</div>
+      </div>
+
+      <div class="member-card">
+        <div class="member-avatar">S</div>
+        <div class="member-name">Secretary</div>
+        <div class="member-role">Administrative Head</div>
+        <div class="member-flat">To be updated</div>
+      </div>
+
+      <div class="member-card">
+        <div class="member-avatar">T</div>
+        <div class="member-name">Treasurer</div>
+        <div class="member-role">Finance</div>
+        <div class="member-flat">To be updated</div>
+      </div>
+
+      <div class="member-card">
+        <div class="member-avatar">M</div>
+        <div class="member-name">Member</div>
+        <div class="member-role">Committee Member</div>
+        <div class="member-flat">To be updated</div>
+      </div>
+
+      <div class="member-card">
+        <div class="member-avatar">M</div>
+        <div class="member-name">Member</div>
+        <div class="member-role">Committee Member</div>
+        <div class="member-flat">To be updated</div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="tagline">Building community, one home at a time.</div>
+    <div class="copyright">&copy; 2026 Cornerstone Cooperative Housing Society. All rights reserved.</div>
+  </footer>
+
+  <script>
+    (function() {
+      const btn   = document.getElementById('theme-toggle');
+      const icon  = btn.querySelector('.toggle-icon');
+      const label = btn.querySelector('.toggle-label');
+
+      function applyTheme(mode) {
+        if (mode === 'day') {
+          document.body.classList.add('day');
+          icon.textContent  = '☀️';
+          label.textContent = 'Day';
+        } else {
+          document.body.classList.remove('day');
+          icon.textContent  = '🌙';
+          label.textContent = 'Night';
+        }
+      }
+
+      applyTheme(localStorage.getItem('cs-theme') || 'night');
+
+      btn.addEventListener('click', function() {
+        const isDay = document.body.classList.contains('day');
+        const next  = isDay ? 'night' : 'day';
+        localStorage.setItem('cs-theme', next);
+        applyTheme(next);
+      });
+    })();
+  </script>
+
+</body>
+</html>
