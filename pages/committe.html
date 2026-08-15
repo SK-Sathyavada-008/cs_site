@@ -161,9 +161,9 @@
     transition: color 0.35s;
   }
 
-  /* ── Committee Grid ── */
+  /* ── Committee Table Section ── */
   .committee-section {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 4rem auto;
     padding: 0 2rem;
   }
@@ -178,66 +178,119 @@
     transition: color 0.35s;
   }
 
-  .committee-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
-    gap: 1.8rem;
-  }
-
-  .member-card {
-    background: var(--card-bg);
+  /* ── Elegant Table ── */
+  .committee-table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
     border: 1px solid var(--card-border);
-    border-radius: 10px;
-    padding: 2rem 1.5rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  }
+
+  table.committee-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  table.committee-table thead tr {
+    background: linear-gradient(135deg, rgba(203,161,53,0.18), rgba(203,161,53,0.06));
+    border-bottom: 1px solid var(--border);
+  }
+
+  table.committee-table thead th {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 1.1rem 1.4rem;
+    text-align: left;
+    white-space: nowrap;
+    transition: color 0.35s;
+  }
+
+  table.committee-table thead th:first-child {
     text-align: center;
-    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    width: 60px;
   }
 
-  .member-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(203,161,53,0.4);
-    background: rgba(203,161,53,0.06);
+  table.committee-table tbody tr {
+    border-bottom: 1px solid var(--card-border);
+    transition: background 0.2s;
   }
 
-  .member-avatar {
-    width: 72px; height: 72px;
+  table.committee-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  table.committee-table tbody tr:hover {
+    background: rgba(203,161,53,0.05);
+  }
+
+  table.committee-table tbody td {
+    padding: 1rem 1.4rem;
+    color: var(--text);
+    transition: color 0.35s;
+  }
+
+  table.committee-table tbody td:first-child {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* Avatar initial inside table */
+  .td-name {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .avatar-sm {
+    width: 38px; height: 38px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(203,161,53,0.3), rgba(203,161,53,0.08));
-    border: 2px solid rgba(203,161,53,0.35);
-    margin: 0 auto 1.2rem;
+    background: linear-gradient(135deg, rgba(203,161,53,0.28), rgba(203,161,53,0.06));
+    border: 1.5px solid rgba(203,161,53,0.35);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--gold);
-    letter-spacing: 0.05em;
+    flex-shrink: 0;
     transition: color 0.35s;
   }
 
-  .member-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
+  .name-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
     color: var(--text);
-    margin-bottom: 0.35rem;
     transition: color 0.35s;
   }
 
-  .member-role {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
+  .role-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 0.8rem;
-    transition: color 0.35s;
+    background: rgba(203,161,53,0.1);
+    border: 1px solid rgba(203,161,53,0.2);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    white-space: nowrap;
+    transition: color 0.35s, background 0.35s;
   }
 
-  .member-flat {
-    font-size: 0.78rem;
+  .expiry-text {
+    font-size: 0.82rem;
     color: var(--text-muted);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
     transition: color 0.35s;
   }
 
@@ -267,24 +320,113 @@
     transition: color 0.35s;
   }
 
-  @media (max-width: 600px) {
-    .committee-grid { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 640px) {
+    .committee-section { padding: 0 1rem; }
+    table.committee-table thead th,
+    table.committee-table tbody td { padding: 0.75rem 0.8rem; }
+    .avatar-sm { display: none; }
   }
-</style>
+
+  /* ── Hamburger button (mobile only) ── */
+  #hamburger {
+    display: none;
+    position: absolute;
+    left: 1.1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 110;
+  }
+
+  #hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background 0.35s;
+  }
+
+  #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #hamburger.open span:nth-child(2) { opacity: 0; }
+  #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Mobile dropdown menu ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 58px;
+    left: 0; right: 0;
+    background: var(--surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 0.5rem 0 1rem;
+    z-index: 99;
+    transition: background 0.35s;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 0.9rem 1.8rem;
+    border-bottom: 1px solid rgba(203,161,53,0.1);
+    transition: color 0.2s, background 0.2s;
+    height: auto;
+    display: block;
+    position: static;
+  }
+
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a::after { display: none; }
+  .mobile-menu a:hover,
+  .mobile-menu a.active {
+    color: var(--gold);
+    background: rgba(203,161,53,0.06);
+  }
+
+  /* ── Mobile responsive ── */
+  @media (max-width: 700px) {
+    #hamburger { display: flex; }
+    nav .nav-links { display: none; }
+    #theme-toggle { right: 1rem; }
+  }
 </head>
 <body>
 
   <nav>
+    <button id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-links">
       <a href="../index.html" id="nav-home">Home</a>
       <a href="committe.html" class="active" id="nav-committee">Committee</a>
       <a href="grievances.html" id="nav-grievances">Grievances</a>
+      <a href="documents.html" id="nav-documents">Documents</a>
     </div>
     <button id="theme-toggle" aria-label="Toggle day/night mode">
       <span class="toggle-icon">🌙</span>
       <span class="toggle-label">Night</span>
     </button>
   </nav>
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="committe.html" class="active">Committee</a>
+    <a href="grievances.html">Grievances</a>
+    <a href="documents.html">Documents</a>
+  </div>
 
   <div class="page-header">
     <h1>The Committee</h1>
@@ -293,44 +435,120 @@
   </div>
 
   <section class="committee-section">
-    <div class="section-label">Executive Members</div>
-    <div class="committee-grid">
+    <div class="section-label">Board of Directors — Term Details</div>
 
-      <div class="member-card">
-        <div class="member-avatar">P</div>
-        <div class="member-name">President</div>
-        <div class="member-role">Chairperson</div>
-        <div class="member-flat">To be updated</div>
-      </div>
-
-      <div class="member-card">
-        <div class="member-avatar">S</div>
-        <div class="member-name">Secretary</div>
-        <div class="member-role">Administrative Head</div>
-        <div class="member-flat">To be updated</div>
-      </div>
-
-      <div class="member-card">
-        <div class="member-avatar">T</div>
-        <div class="member-name">Treasurer</div>
-        <div class="member-role">Finance</div>
-        <div class="member-flat">To be updated</div>
-      </div>
-
-      <div class="member-card">
-        <div class="member-avatar">M</div>
-        <div class="member-name">Member</div>
-        <div class="member-role">Committee Member</div>
-        <div class="member-flat">To be updated</div>
-      </div>
-
-      <div class="member-card">
-        <div class="member-avatar">M</div>
-        <div class="member-name">Member</div>
-        <div class="member-role">Committee Member</div>
-        <div class="member-flat">To be updated</div>
-      </div>
-
+    <div class="committee-table-wrap">
+      <table class="committee-table" aria-label="Committee Members">
+        <thead>
+          <tr>
+            <th>S.No.</th>
+            <th>Name of the Director</th>
+            <th>Post Held</th>
+            <th>Expiry of Term</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>
+              <div class="td-name">
+                <div class="avatar-sm">M</div>
+                <span class="name-text">Mannem Venkat Reddy</span>
+              </div>
+            </td>
+            <td><span class="role-badge">President</span></td>
+            <td><span class="expiry-text">20-06-2029</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>
+              <div class="td-name">
+                <div class="avatar-sm">D</div>
+                <span class="name-text">Deshmukh Sanjay Kumar</span>
+              </div>
+            </td>
+            <td><span class="role-badge">Vice President</span></td>
+            <td><span class="expiry-text">20-06-2027</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>
+              <div class="td-name">
+                <div class="avatar-sm">K</div>
+                <span class="name-text">Kalyan Sathyavada</span>
+              </div>
+            </td>
+            <td><span class="role-badge">Secretary</span></td>
+            <td><span class="expiry-text">20-06-2029</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>
+              <div class="td-name">
+                <div class="avatar-sm">O</div>
+                <span class="name-text">O Pavani Parveen</span>
+              </div>
+            </td>
+            <td><span class="role-badge">Joint Secretary</span></td>
+            <td><span class="expiry-text">20-06-2028</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>
+              <div class="td-name">
+                <div class="avatar-sm">A</div>
+                <span class="name-text">Anudeep Vemula</span>
+              </div>
+            </td>
+            <td><span class="role-badge">Treasurer</span></td>
+            <td><span class="expiry-text">20-06-2027</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>
+              <div class="td-name">
+                <div class="avatar-sm">L</div>
+                <span class="name-text">Dr Lalith Kumar Vemali</span>
+              </div>
+            </td>
+            <td><span class="role-badge">Board of Director</span></td>
+            <td><span class="expiry-text">20-06-2029</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>
+              <div class="td-name">
+                <div class="avatar-sm">B</div>
+                <span class="name-text">Bora Bala Krishna</span>
+              </div>
+            </td>
+            <td><span class="role-badge">Board of Director</span></td>
+            <td><span class="expiry-text">20-06-2027</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>
+              <div class="td-name">
+                <div class="avatar-sm">R</div>
+                <span class="name-text">Raghavendra Chitturi</span>
+              </div>
+            </td>
+            <td><span class="role-badge">Board of Director</span></td>
+            <td><span class="expiry-text">20-06-2028</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>
+              <div class="td-name">
+                <div class="avatar-sm">S</div>
+                <span class="name-text">Sudireddy Rajamalla Reddy</span>
+              </div>
+            </td>
+            <td><span class="role-badge">Board of Director</span></td>
+            <td><span class="expiry-text">20-06-2028</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
@@ -364,6 +582,26 @@
         const next  = isDay ? 'night' : 'day';
         localStorage.setItem('cs-theme', next);
         applyTheme(next);
+      });
+
+      /* ── Hamburger ── */
+      const burger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      burger.addEventListener('click', function() {
+        const isOpen = burger.classList.toggle('open');
+        mobileMenu.classList.toggle('open', isOpen);
+        burger.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!burger.contains(e.target) && !mobileMenu.contains(e.target)) {
+          burger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
       });
     })();
   </script>

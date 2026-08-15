@@ -488,21 +488,108 @@
     .submit-btn { align-self: stretch; text-align: center; }
     .grievance-form { padding: 1.8rem 1.2rem; }
   }
+
+  /* ── Hamburger button (mobile only) ── */
+  #hamburger {
+    display: none;
+    position: absolute;
+    left: 1.1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 110;
+  }
+
+  #hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background 0.35s;
+  }
+
+  #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #hamburger.open span:nth-child(2) { opacity: 0; }
+  #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Mobile dropdown menu ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 58px;
+    left: 0; right: 0;
+    background: var(--surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 0.5rem 0 1rem;
+    z-index: 99;
+    transition: background 0.35s;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 0.9rem 1.8rem;
+    border-bottom: 1px solid rgba(203,161,53,0.1);
+    transition: color 0.2s, background 0.2s;
+    height: auto;
+    display: block;
+    position: static;
+  }
+
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a::after { display: none; }
+  .mobile-menu a:hover,
+  .mobile-menu a.active {
+    color: var(--gold);
+    background: rgba(203,161,53,0.06);
+  }
+
+  /* ── Mobile responsive ── */
+  @media (max-width: 700px) {
+    #hamburger { display: flex; }
+    nav .nav-links { display: none; }
+    #theme-toggle { right: 1rem; }
+  }
 </style>
 </head>
 <body>
 
   <nav>
+    <button id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-links">
       <a href="../index.html" id="nav-home">Home</a>
       <a href="committe.html" id="nav-committee">Committee</a>
       <a href="grievances.html" class="active" id="nav-grievances">Grievances</a>
+      <a href="documents.html" id="nav-documents">Documents</a>
     </div>
     <button id="theme-toggle" aria-label="Toggle day/night mode">
       <span class="toggle-icon">🌙</span>
       <span class="toggle-label">Night</span>
     </button>
   </nav>
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="committe.html">Committee</a>
+    <a href="grievances.html" class="active">Grievances</a>
+    <a href="documents.html">Documents</a>
+  </div>
 
   <div class="page-header">
     <h1>Grievances</h1>
@@ -643,6 +730,26 @@
         const next  = isDay ? 'night' : 'day';
         localStorage.setItem('cs-theme', next);
         applyTheme(next);
+      });
+
+      /* ── Hamburger ── */
+      const burger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      burger.addEventListener('click', function() {
+        const isOpen = burger.classList.toggle('open');
+        mobileMenu.classList.toggle('open', isOpen);
+        burger.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!burger.contains(e.target) && !mobileMenu.contains(e.target)) {
+          burger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
       });
     })();
 

@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documents – Cornerstone Cooperative Housing Society</title>
+<meta name="description" content="Access official linked documents of Cornerstone Cooperative Housing Society including Occupancy Certificate, RERA Certificate, HMDA Approval and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── Colour tokens – Night (default) ── */
+  :root {
+    --bg:         #14120f;
+    --surface:    rgba(20,18,15,0.92);
+    --text:       #f6f1e9;
+    --text-muted: rgba(246,241,233,0.55);
+    --gold:       #cba135;
+    --border:     rgba(203,161,53,0.25);
+    --card-bg:    rgba(255,255,255,0.04);
+    --card-border:rgba(203,161,53,0.12);
+    --btn-preview-bg: rgba(203,161,53,0.12);
+    --btn-preview-border: rgba(203,161,53,0.35);
+    --btn-download-bg: rgba(203,161,53,0.85);
+    --btn-download-text: #14120f;
+  }
+
+  /* ── Day mode overrides ── */
+  body.day {
+    --bg:         #f4f0e8;
+    --surface:    rgba(244,240,232,0.95);
+    --text:       #1a1714;
+    --text-muted: rgba(26,23,20,0.55);
+    --gold:       #9a7520;
+    --border:     rgba(154,117,32,0.3);
+    --card-bg:    rgba(255,255,255,0.65);
+    --card-border:rgba(154,117,32,0.2);
+    --btn-preview-bg: rgba(154,117,32,0.1);
+    --btn-preview-border: rgba(154,117,32,0.4);
+    --btn-download-bg: #9a7520;
+    --btn-download-text: #f4f0e8;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: background 0.35s, color 0.35s;
+  }
+
+  /* ── Navbar ── */
+  nav {
+    position: sticky;
+    top: 0; z-index: 100;
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    height: 58px;
+    transition: background 0.35s, border-color 0.35s;
+  }
+
+  nav .nav-links {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex: 1;
+    justify-content: center;
+  }
+
+  nav a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 0 1.6rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: color 0.25s;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover, nav a.active { color: var(--text); }
+  nav a:hover::after, nav a.active::after { width: 60%; }
+
+  /* ── Day/Night toggle ── */
+  #theme-toggle {
+    position: absolute;
+    right: 1.5rem;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    white-space: nowrap;
+  }
+
+  #theme-toggle:hover {
+    border-color: var(--gold);
+    color: var(--text);
+    background: rgba(203,161,53,0.08);
+  }
+
+  #theme-toggle .toggle-icon { font-size: 0.95rem; }
+
+  /* ── Page Header ── */
+  .page-header {
+    text-align: center;
+    padding: 4rem 1.5rem 2.5rem;
+    border-bottom: 1px solid rgba(203,161,53,0.15);
+    transition: border-color 0.35s;
+  }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    color: var(--text);
+    letter-spacing: 0.04em;
+    transition: color 0.35s;
+  }
+
+  .page-header .gold-line {
+    width: 80px; height: 2px;
+    background: var(--gold);
+    margin: 1.2rem auto;
+    transition: background 0.35s;
+  }
+
+  .page-header p {
+    font-weight: 300;
+    font-size: clamp(0.85rem, 1.4vw, 1rem);
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    transition: color 0.35s;
+  }
+
+  /* ── Documents Section ── */
+  .docs-section {
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.2rem;
+    text-align: center;
+    transition: color 0.35s;
+  }
+
+  /* ── Document Cards ── */
+  .doc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .doc-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.4rem 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .doc-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(203,161,53,0.38);
+    background: rgba(203,161,53,0.05);
+  }
+
+  /* Document icon area */
+  .doc-icon {
+    width: 52px; height: 52px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(203,161,53,0.22), rgba(203,161,53,0.06));
+    border: 1.5px solid rgba(203,161,53,0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.45rem;
+  }
+
+  /* Document info */
+  .doc-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .doc-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+    transition: color 0.35s;
+  }
+
+  .doc-status {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    transition: color 0.35s;
+  }
+
+  /* Action buttons */
+  .doc-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  .btn-preview,
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 0.42rem 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.18s;
+    white-space: nowrap;
+  }
+
+  .btn-preview {
+    background: var(--btn-preview-bg);
+    border-color: var(--btn-preview-border);
+    color: var(--gold);
+  }
+
+  .btn-preview:hover {
+    background: rgba(203,161,53,0.2);
+    transform: scale(1.04);
+  }
+
+  .btn-download {
+    background: var(--btn-download-bg);
+    border-color: transparent;
+    color: var(--btn-download-text);
+    font-weight: 600;
+  }
+
+  .btn-download:hover {
+    filter: brightness(1.1);
+    transform: scale(1.04);
+  }
+
+  /* Coming soon state */
+  .btn-preview.disabled,
+  .btn-download.disabled {
+    opacity: 0.38;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  .coming-soon-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: rgba(246,241,233,0.05);
+    border: 1px solid rgba(246,241,233,0.1);
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    transition: color 0.35s, background 0.35s;
+  }
+
+  body.day .coming-soon-badge {
+    background: rgba(26,23,20,0.05);
+    border-color: rgba(26,23,20,0.12);
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 2.5rem 1.5rem 3rem;
+    border-top: 1px solid rgba(203,161,53,0.1);
+    margin-top: 5rem;
+    transition: border-color 0.35s;
+  }
+
+  footer .tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    transition: color 0.35s;
+  }
+
+  footer .copyright {
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    transition: color 0.35s;
+  }
+
+  /* ── Preview Modal Overlay ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    max-width: 560px;
+    width: 100%;
+    padding: 2.2rem;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    animation: modalIn 0.3s ease-out forwards;
+  }
+
+  @keyframes modalIn {
+    from { opacity:0; transform: scale(0.9) translateY(20px); }
+    to   { opacity:1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1.1rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  .modal-icon {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    transition: color 0.35s;
+  }
+
+  .modal-msg {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    transition: color 0.35s;
+  }
+
+  .modal-gold-line {
+    width: 50px; height: 2px;
+    background: var(--gold);
+    margin: 1rem auto;
+  }
+
+  @media (max-width: 640px) {
+    .doc-card {
+      flex-wrap: wrap;
+      padding: 1.1rem 1.1rem;
+    }
+    .doc-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+    .docs-section { padding: 0 1rem; }
+  }
+
+  /* ── Hamburger button (mobile only) ── */
+  #hamburger {
+    display: none;
+    position: absolute;
+    left: 1.1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 110;
+  }
+
+  #hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background 0.35s;
+  }
+
+  #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #hamburger.open span:nth-child(2) { opacity: 0; }
+  #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Mobile dropdown menu ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 58px;
+    left: 0; right: 0;
+    background: var(--surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 0.5rem 0 1rem;
+    z-index: 99;
+    transition: background 0.35s;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 0.9rem 1.8rem;
+    border-bottom: 1px solid rgba(203,161,53,0.1);
+    transition: color 0.2s, background 0.2s;
+    height: auto;
+    display: block;
+    position: static;
+  }
+
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a::after { display: none; }
+  .mobile-menu a:hover,
+  .mobile-menu a.active {
+    color: var(--gold);
+    background: rgba(203,161,53,0.06);
+  }
+
+  /* ── Mobile responsive ── */
+  @media (max-width: 700px) {
+    #hamburger { display: flex; }
+    nav .nav-links { display: none; }
+    #theme-toggle { right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <button id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="../index.html" id="nav-home">Home</a>
+      <a href="committe.html" id="nav-committee">Committee</a>
+      <a href="grievances.html" id="nav-grievances">Grievances</a>
+      <a href="documents.html" class="active" id="nav-documents">Documents</a>
+    </div>
+    <button id="theme-toggle" aria-label="Toggle day/night mode">
+      <span class="toggle-icon">🌙</span>
+      <span class="toggle-label">Night</span>
+    </button>
+  </nav>
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../index.html">Home</a>
+    <a href="committe.html">Committee</a>
+    <a href="grievances.html">Grievances</a>
+    <a href="documents.html" class="active">Documents</a>
+  </div>
+
+  <div class="page-header">
+    <h1>Linked Documents</h1>
+    <div class="gold-line"></div>
+    <p>Official certificates, approvals, and plans for Cornerstone Cooperative Housing Society.</p>
+  </div>
+
+  <section class="docs-section">
+    <div class="section-label">Official Records &amp; Certificates</div>
+
+    <div class="doc-list">
+
+      <!-- 1. Occupancy Certificate -->
+      <div class="doc-card" id="doc-occupancy">
+        <div class="doc-icon">🏛️</div>
+        <div class="doc-info">
+          <div class="doc-title">
+            Occupancy Certificate
+            <span class="coming-soon-badge">Uploading Soon</span>
+          </div>
+          <div class="doc-status">Official occupancy certificate issued by the competent authority</div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-preview disabled" id="btn-preview-occupancy" aria-label="Preview Occupancy Certificate">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            Preview
+          </button>
+          <button class="btn-download disabled" id="btn-download-occupancy" aria-label="Download Occupancy Certificate">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. RERA Certificate -->
+      <div class="doc-card" id="doc-rera">
+        <div class="doc-icon">📋</div>
+        <div class="doc-info">
+          <div class="doc-title">
+            RERA Certificate
+            <span class="coming-soon-badge">Uploading Soon</span>
+          </div>
+          <div class="doc-status">Real Estate Regulatory Authority registration certificate</div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-preview disabled" id="btn-preview-rera" aria-label="Preview RERA Certificate">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            Preview
+          </button>
+          <button class="btn-download disabled" id="btn-download-rera" aria-label="Download RERA Certificate">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. HMDA Approval Proceeding Letter -->
+      <div class="doc-card" id="doc-hmda">
+        <div class="doc-icon">🏗️</div>
+        <div class="doc-info">
+          <div class="doc-title">
+            HMDA Approval Proceeding Letter
+            <span class="coming-soon-badge">Uploading Soon</span>
+          </div>
+          <div class="doc-status">Hyderabad Metropolitan Development Authority approval proceeding letter</div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-preview disabled" id="btn-preview-hmda" aria-label="Preview HMDA Approval Proceeding Letter">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            Preview
+          </button>
+          <button class="btn-download disabled" id="btn-download-hmda" aria-label="Download HMDA Approval Proceeding Letter">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. Drawings -->
+      <div class="doc-card" id="doc-drawings">
+        <div class="doc-icon">📐</div>
+        <div class="doc-info">
+          <div class="doc-title">
+            Drawings
+            <span class="coming-soon-badge">Uploading Soon</span>
+          </div>
+          <div class="doc-status">Architectural and structural drawings of the building</div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-preview disabled" id="btn-preview-drawings" aria-label="Preview Drawings">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            Preview
+          </button>
+          <button class="btn-download disabled" id="btn-download-drawings" aria-label="Download Drawings">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </button>
+        </div>
+      </div>
+
+      <!-- 5. Flat Plans -->
+      <div class="doc-card" id="doc-flatplans">
+        <div class="doc-icon">🗺️</div>
+        <div class="doc-info">
+          <div class="doc-title">
+            Flat Plans
+            <span class="coming-soon-badge">Uploading Soon</span>
+          </div>
+          <div class="doc-status">Individual flat layout plans and floor-wise unit details</div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-preview disabled" id="btn-preview-flatplans" aria-label="Preview Flat Plans">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            Preview
+          </button>
+          <button class="btn-download disabled" id="btn-download-flatplans" aria-label="Download Flat Plans">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="tagline">Building community, one home at a time.</div>
+    <div class="copyright">&copy; 2026 Cornerstone Cooperative Housing Society. All rights reserved.</div>
+  </footer>
+
+  <!-- Preview Modal -->
+  <div class="modal-overlay" id="preview-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close-btn" aria-label="Close modal">✕</button>
+      <div class="modal-icon">📄</div>
+      <div class="modal-gold-line"></div>
+      <div class="modal-title" id="modal-title-text">Document Coming Soon</div>
+      <div class="modal-msg">
+        This document will be available once uploaded by the administrator.<br>
+        Please check back later.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ── Theme ── */
+    (function() {
+      const btn   = document.getElementById('theme-toggle');
+      const icon  = btn.querySelector('.toggle-icon');
+      const label = btn.querySelector('.toggle-label');
+
+      function applyTheme(mode) {
+        if (mode === 'day') {
+          document.body.classList.add('day');
+          icon.textContent  = '☀️';
+          label.textContent = 'Day';
+        } else {
+          document.body.classList.remove('day');
+          icon.textContent  = '🌙';
+          label.textContent = 'Night';
+        }
+      }
+
+      applyTheme(localStorage.getItem('cs-theme') || 'night');
+
+      btn.addEventListener('click', function() {
+        const isDay = document.body.classList.contains('day');
+        const next  = isDay ? 'night' : 'day';
+        localStorage.setItem('cs-theme', next);
+        applyTheme(next);
+      });
+
+      /* ── Hamburger ── */
+      const burger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      burger.addEventListener('click', function() {
+        const isOpen = burger.classList.toggle('open');
+        mobileMenu.classList.toggle('open', isOpen);
+        burger.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!burger.contains(e.target) && !mobileMenu.contains(e.target)) {
+          burger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
+      });
+    })();
+
+    /* ── Documents config
+       When you add a file, set `file` to the relative path and `type` to 'pdf' or 'image'.
+       Leave `file` as null to keep the "Coming Soon" state. ── */
+    const docs = {
+      occupancy: { title: 'Occupancy Certificate',             file: null, type: 'pdf' },
+      rera:      { title: 'RERA Certificate',                  file: null, type: 'pdf' },
+      hmda:      { title: 'HMDA Approval Proceeding Letter',   file: null, type: 'pdf' },
+      drawings:  { title: 'Drawings',                          file: null, type: 'pdf' },
+      flatplans: { title: 'Flat Plans',                        file: null, type: 'pdf' },
+    };
+
+    /* ── Modal helpers ── */
+    const modal    = document.getElementById('preview-modal');
+    const modalTitle = document.getElementById('modal-title-text');
+    const closeBtn = document.getElementById('modal-close-btn');
+
+    function openModal(title) {
+      modalTitle.textContent = title + ' — Coming Soon';
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    /* ── Wire up buttons ── */
+    Object.entries(docs).forEach(function([key, doc]) {
+      const previewBtn  = document.getElementById('btn-preview-'  + key);
+      const downloadBtn = document.getElementById('btn-download-' + key);
+
+      if (doc.file) {
+        /* Document is available */
+        previewBtn.classList.remove('disabled');
+        downloadBtn.classList.remove('disabled');
+
+        previewBtn.addEventListener('click', function() {
+          /* Open PDF/image in a new tab for preview */
+          window.open(doc.file, '_blank', 'noopener');
+        });
+
+        downloadBtn.setAttribute('href', doc.file);
+        downloadBtn.setAttribute('download', '');
+        downloadBtn.addEventListener('click', function() {
+          const a = document.createElement('a');
+          a.href = doc.file;
+          a.download = doc.title;
+          a.click();
+        });
+
+        /* Remove coming-soon badge */
+        const card  = document.getElementById('doc-' + key);
+        const badge = card ? card.querySelector('.coming-soon-badge') : null;
+        if (badge) badge.remove();
+
+      } else {
+        /* Not yet uploaded — clicking preview shows modal */
+        previewBtn.classList.add('disabled');
+        downloadBtn.classList.add('disabled');
+      }
+    });
+  </script>
+
+</body>
+</html>
